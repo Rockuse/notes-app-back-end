@@ -13,6 +13,6 @@
     },
     "rules": {
         "linebreak-style": ["error", "windows"],
-        "no-console": ["error",{"allow":"log"}]
+        "no-console": ["error",{"allow":["log"]}]
     }
 }
