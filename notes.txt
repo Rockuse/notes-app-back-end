@@ -1,0 +1,14 @@
+Connect : 
+752486109021
+
+ssh -i "notes-app-back-end.pem" ubuntu@ec2-54-169-198-120.ap-southeast-1.compute.amazonaws.com
+sudo 
+https://github.com/nodesource/distributions/blob/master/README.md#debinstall
+sudo apt-get install git
+
+sudo npm install -g pm2
+pm2 start npm --name "notes-api" -- run "start-prod" 
+
+check running node:
+lsof -i :5000
+kill -15 <PID>
