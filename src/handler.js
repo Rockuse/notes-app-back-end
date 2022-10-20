@@ -61,7 +61,7 @@ function getNoteByIdHandler(req, h) {
 
 async function editNoteByIdHandler(req, h) {
   const { id } = req.params;
-  const { tags, title } = req.payload;
+  const { tags, title, body } = req.payload;
   const updatedAt = new Date().toISOString();
   const index = await notes.findIndex((note) => note.id === id);
   //   console.log(notes[index],index);
@@ -69,6 +69,7 @@ async function editNoteByIdHandler(req, h) {
     notes[index].title = title;
     notes[index].tags = tags;
     notes[index].updatedAt = updatedAt;
+    notes[index].body = body;
     // notes[index] = {
     //   ...notes[index],
     //   title,
