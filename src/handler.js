@@ -66,17 +66,17 @@ async function editNoteByIdHandler(req, h) {
   const index = await notes.findIndex((note) => note.id === id);
   //   console.log(notes[index],index);
   if (index !== -1) {
-    notes[index].title = title;
-    notes[index].tags = tags;
-    notes[index].updatedAt = updatedAt;
-    notes[index].body = body;
-    // notes[index] = {
-    //   ...notes[index],
-    //   title,
-    //   tags,
-    //   body,
-    //   updatedAt,
-    // };
+    // notes[index].title = title;
+    // notes[index].tags = tags;
+    // notes[index].updatedAt = updatedAt;
+    // notes[index].body = body;
+    notes[index] = {
+      ...notes[index],
+      title,
+      tags,
+      body,
+      updatedAt,
+    };
 
     const response = h.response({
       status: 'success',
