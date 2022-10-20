@@ -1,14 +1,20 @@
-const Hapi = require("@hapi/hapi")
-const routes = require('./routes')
+/* eslint-disable no-console */
+const Hapi = require('@hapi/hapi');
+const routes = require('./routes');
 
 async function init() {
-    const server = Hapi.server({
-        port: 5000,
-        host: 'localhost'
-    })
-    server.route(routes)
-    await server.start()
-    console.log('server start')
+  const server = Hapi.server({
+    port: 5000,
+    host: 'localhost',
+    routes: {
+      cors: {
+        origin: ['*'],
+      },
+    },
+  });
+  server.route(routes);
+  await server.start();
+  console.log('server start');
 }
 
-init()
+init();
