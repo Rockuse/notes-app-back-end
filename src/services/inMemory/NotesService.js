@@ -18,7 +18,6 @@ class NotesService {
     if (!isSuccess) {
       throw new Error('Catatan gagal ditambahkan');
     }
-
     return id;
   }
 
@@ -27,17 +26,32 @@ class NotesService {
   }
 
   getNoteById(id) {
-    const note = this._notes.filter((n) => n.id === id);
+    const note = this._notes.filter((n) => n.id === id)[0];
     return note;
   }
 
-  editNoteById(id) {
-    const index = this._notes.findIndex((n) => n.id = id);
-    this._notes[index]
+  editNoteById(id, { title, body, tags }) {
+    const index = this._notes.findIndex((n) => n.id === id);
+    if (index === -1) {
+      throw new Error('Gagal memperbarui catatan. Id tidak ditemukan');
+    }
+    const updatedAt = new Date().toISOString();
+
+    this._notes[index] = {
+      ...this._notes[index],
+      title,
+      body,
+      tags,
+      updatedAt,
+    };
   }
 
   deleteNoteById(id) {
-
+    const index = this._notes.findIndex((note) => note.id === id);
+    if (index === -1) {
+      throw new Error('Catatan gagal dihapus. Id tidak ditemukan');
+    }
+    this._notes.splice(index, 1);
   }
 }
 

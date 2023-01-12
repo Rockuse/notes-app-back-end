@@ -26,21 +26,38 @@ class NotesHandler {
     try {
       const notes = this._service.getNote();
       return {
-        status: 'success',
+        status: 'success',
         data: {
           notes,
         },
       };
-    }
     } catch (error) {
       return false;
     }
   }
 
-  getNoteByIdHandler() {
+  getNoteByIdHandler(request) {
+    try {
+      const { id } = request.params;
+      const notes = this._service.getNoteById(id);
+      return {
+        status: 'success',
+        data: {
+          notes,
+        },
+      };
+    } catch (error) {
+      return false;
+    }
   }
 
-  putNoteByIdHandler() {
+  putNoteByIdHandler(request) {
+    try {
+      const { id } = request.params;
+      this.service.editNoteById(id);
+    } catch (error) {
+
+    }
   }
 
   deleteNoteByIdHandler() {
