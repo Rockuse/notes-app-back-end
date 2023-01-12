@@ -1,13 +1,12 @@
 const { nanoid } = require('nanoid');
-const { getNoteByIdHandler } = require('../../handler');
 const notes = require('./notes');
 
 class NotesService {
   constructor() {
     this._notes = [];
   }
-  
-addNote({title,body,tags}){ 
+
+  addNote({ title, body, tags }) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
@@ -15,20 +14,27 @@ addNote({title,body,tags}){
       id, tags, title, body, createdAt, updatedAt,
     };
     this._notes.push(newNotes)
-    const isSuccess=this._notes.filter(note=>note.id===id).length>0
+    const isSuccess = this._notes.filter(note => note.id === id).length > 0
     if (!isSuccess) {
-        throw new Error('Catatan gagal ditambahkan');
-      }
-   
-      return id;
-}
+      throw new Error('Catatan gagal ditambahkan');
+    }
 
-getNote(){
-    return this._notes
-}
+    return id;
+  }
 
-getNoteById(){
-    
+  getNote() {
     return this._notes
-}
+  }
+
+  getNoteById(id) {
+    const note = this._notes.filter(n => n.id === id[0])
+    return note
+  }
+
+  editNoteById() {
+
+  }
+  deleteNoteById( ) {
+
+  }
 }

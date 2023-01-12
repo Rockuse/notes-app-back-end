@@ -8,13 +8,13 @@
     "lint": "eslint ./",
     "lintfix": "eslint --fix ./",
     "start": "nodemon ./src/server.js",
-    "start-prod":"NODE_ENV=production node ./src/server.js"
+    "start-prod": "NODE_ENV=production node ./src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.25.0",
+    "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.26.0",
