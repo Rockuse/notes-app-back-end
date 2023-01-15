@@ -8,7 +8,7 @@
     "lint": "eslint ./",
     "lintfix": "eslint --fix ./",
     "start": "nodemon ./src/server.js",
-    "start-prod":"NODE_ENV=production node ./src/server.js"
+    "start-prod": "NODE_ENV=production node ./src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.2.2",
+    "joi": "^17.7.0",
     "nanoid": "^3.3.4"
   }
 }
