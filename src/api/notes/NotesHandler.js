@@ -1,6 +1,12 @@
 class NotesHandler {
   constructor(service) {
     this._service = service;
+
+    this.postNoteHandler = this.postNoteHandler.bind(this);
+    this.getNoteHandler = this.getNoteHandler.bind(this);
+    this.getNoteByIdHandler = this.getNoteByIdHandler.bind(this);
+    this.putNoteByIdHandler = this.putNoteByIdHandler.bind(this);
+    this.deleteNoteByIdHandler = this.deleteNoteByIdHandler.bind(this);
   }
 
   postNoteHandler(req, h) {
@@ -51,17 +57,40 @@ class NotesHandler {
     }
   }
 
-  putNoteByIdHandler(request) {
+  putNoteByIdHandler(request, h) {
     try {
       const { id } = request.params;
-      this.service.editNoteById(id);
+      this._service.editNoteById(id, request.payload);
+      return {
+        status: 'success',
+        message: 'Catatan berhasil diperbarui',
+      };
     } catch (error) {
-
+      const response = h.response({
+        status: "fail",
+        message: error.message
+      });
+      response.code(404);
+      return response
     }
   }
 
-  deleteNoteByIdHandler() {
-
+  deleteNoteByIdHandler(request,h) {
+    try {
+      const { id } = request.params;
+      this._service.deleteNoteById(id);
+      return {
+        status: 'success',
+        message: 'Catatan berhasil dihapus',
+      };
+    } catch (error) {
+      const response = h.response({
+        status: 'fail',
+        message: error.message,
+      });
+      response.code(404);
+      return response;
+    }
   }
 }
 
