@@ -24,3 +24,5 @@ check running node:
 lsof -i :5000
 kill -15 <PID>
 http://54.169.198.120:5000/notes
+
+npm init @eslint/config

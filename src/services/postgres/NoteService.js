@@ -70,7 +70,7 @@ class NotesService {
         throw new NotFoundError('Catatan gagal dihapus. Id tidak ditemukan');
       }
     } catch (error) {
-      throw new Error(error.message);
+      throw new InvariantError(error.message);
     }
   }
 }
