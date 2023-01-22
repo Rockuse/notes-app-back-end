@@ -10,10 +10,11 @@ class UsersHandler {
   async postUser(request, h) {
     this._validator.validateUserPayload(request.payload);
     const { username, password, fullname } = request.payload;
-    const id = await this._service.addUser(username, password, fullname);
+    const id = await this._service.addUser({ username, password, fullname });
     const res = h.response({
       status: 'success',
       data: { userId: id },
+      message: 'User berhasil ditambahkan',
     });
     res.code(201);
     return res;
@@ -25,6 +26,7 @@ class UsersHandler {
     const res = h.response({
       status: 'success',
       data: { user },
+
     });
     return res;
   }

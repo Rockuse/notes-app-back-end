@@ -19,14 +19,15 @@ class UserService {
       values: [id, username, hashedPassword, fullname],
     };
     const result = await this._pool.query(query);
-    if (!result.rows[0].id) {
+    // console.log(result.rows);
+    if (!result.rowCount) {
       throw new InvariantError('User gagal ditambahkan');
     }
     return result.rows[0].id;
   }
 
   async verifyNewUsername(username) {
-    const result = await this._pool(`SELECT username FROM users where username=\'${username}\' `);
+    const result = await this._pool.query(`SELECT username FROM users where username=\'${username}\' `);
     if (result.rows.length) {
       throw new InvariantError('Gagal menambahkan user. Username sudah digunakan.');
     }
@@ -41,8 +42,8 @@ class UserService {
   async getUserById(id) {
     const query = { text: `SELECT id, username, fullname FROM users where id=\'${id}\'` };
     const result = await this._pool.query(query);
-    if (result.rowCount) {
-      throw new NotFoundError('User Id tidak ditemukan');
+    if (!result.rowCount) {
+      throw new NotFoundError('User tidak ditemukan');
     }
     return result.rows[0];
   }
