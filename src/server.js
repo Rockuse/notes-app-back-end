@@ -1,9 +1,11 @@
 require('dotenv').config();
 const Hapi = require('@hapi/hapi');
+const Jwt = require('@hapi/jwt');
 // const routes = require('./routes');
 const api = require('./api');
 const ClientError = require('./exceptions/ClientError');
 const Services = require('./services/postgres');
+const TokenManager = require('./tokenize/TokenManager');
 const validator = require('./validator');
 
 async function init() {
@@ -16,7 +18,7 @@ async function init() {
       },
     },
   });
-  const arr = [];
+  const arr = [{ plugin: Jwt }];
   for (let i = 0; i < api.length; i += 1) {
     const element = {
       plugin: api[i],
@@ -25,8 +27,22 @@ async function init() {
         validator: validator[i],
       },
     };
+
+    if (element.plugin.name === 'authentications') {
+      element.options = {
+        authenticationsService: new Services[i](),
+        usersService: new Services[i - 1](),
+        tokenManager: TokenManager,
+        ...element.options,
+      };
+      delete element.options.service;
+      element.options.service = [];
+    }
+
     arr.push(element);
   }
+  // console.log(arr);
+
   await server.register(arr);
 
   server.ext('onPreResponse', (request, h) => {
