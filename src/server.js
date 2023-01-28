@@ -18,7 +18,12 @@ async function init() {
       },
     },
   });
-  const arr = [{ plugin: Jwt }];
+  await server.register([
+    {
+      plugin: Jwt,
+    },
+  ]);
+  const arr = [];
   for (let i = 0; i < api.length; i += 1) {
     const element = {
       plugin: api[i],
@@ -41,7 +46,6 @@ async function init() {
 
     arr.push(element);
   }
-  // console.log(arr);
   server.auth.strategy('notesapp_jwt', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
     verify: {
@@ -57,6 +61,7 @@ async function init() {
       },
     }),
   });
+  // console.log(arr[1].options.validator);
 
   await server.register(arr);
 

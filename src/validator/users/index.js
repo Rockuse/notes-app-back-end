@@ -1,11 +1,12 @@
 const InvariantError = require('../../exceptions/InvariantError');
-const { NotePayloadSchema } = require('./schema');
+const { UserPayloadSchema } = require('./schema');
 
 module.exports = {
-  validateNotePayload: (payload) => {
-    const validationResult = NotePayloadSchema.validate(payload);
+  validateUserPayload: (payload) => {
+    const validationResult = UserPayloadSchema.validate(payload);
     if (validationResult.error) {
       throw new InvariantError(validationResult.error.message);
     }
   },
+
 };
