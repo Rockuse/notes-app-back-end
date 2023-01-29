@@ -32,6 +32,12 @@ async function init() {
         validator: validator[i],
       },
     };
+    if (element.plugin.name === 'notes') {
+      element.options.service = new Services[i](new Services[3]());
+    }
+    if (element.plugin.name === 'collaborations') {
+      element.options = { notesService: new Services[0](), ...element.options };
+    }
 
     if (element.plugin.name === 'authentications') {
       element.options = {
@@ -61,7 +67,7 @@ async function init() {
       },
     }),
   });
-  // console.log(arr[1].options.validator);
+  console.log(arr);
 
   await server.register(arr);
 
