@@ -1,6 +1,7 @@
 require('dotenv').config();
 const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
+const Inert = require('@hapi/inert');
 // const routes = require('./routes');
 const api = require('./api');
 const ClientError = require('./exceptions/ClientError');
@@ -22,6 +23,10 @@ async function init() {
     {
       plugin: Jwt,
     },
+    {
+      plugin: Inert,
+    },
+
   ]);
   const arr = [];
   for (let i = 0; i < api.length; i += 1) {
@@ -51,6 +56,7 @@ async function init() {
     }
     arr.push(element);
   }
+
   server.auth.strategy('notesapp_jwt', 'jwt', {
     keys: process.env.ACCESS_TOKEN_KEY,
     verify: {
@@ -66,7 +72,6 @@ async function init() {
       },
     }),
   });
-  console.log(arr);
 
   await server.register(arr);
 

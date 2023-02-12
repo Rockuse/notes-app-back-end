@@ -1,2 +1,2 @@
 // eslint-disable-next-line global-require
-module.exports = [require('./notes'), require('./users'), require('./authentications'), require('./collaborations'), require('./exports')];
+module.exports = [require('./notes'), require('./users'), require('./authentications'), require('./collaborations'), require('./exports'), require('./uploads')];

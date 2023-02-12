@@ -1,2 +1,5 @@
 node_modules
 notes-app-back-end.pem
+.env
+.prod.env
+src/api/uploads/file
