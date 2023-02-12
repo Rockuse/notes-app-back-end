@@ -49,7 +49,6 @@ async function init() {
       delete element.options.service;
       element.options.service = [];
     }
-
     arr.push(element);
   }
   server.auth.strategy('notesapp_jwt', 'jwt', {
